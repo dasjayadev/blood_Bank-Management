@@ -1,5 +1,7 @@
 let bcrypt = require("bcryptjs");
+let jwt = require("jsonwebtoken");
 const userModel = require("../models/user");
+const { status } = require("express/lib/response");
 //this is for the registration
 let registerController = async (req, res, next) => {
   try {
@@ -35,4 +37,67 @@ let registerController = async (req, res, next) => {
     });
   }
 };
-module.exports = { registerController };
+//this is for login and generating token
+let loginController = async (req, res, next) => {
+  try {
+    if (!req.body.email || !req.body.password || !req.body.role)
+      return res.status(401).send({ message: "all fields are required" });
+    let findData = await userModel.findOne({ email: req.body.email });
+    if (!findData)
+      return res.status(401).send({
+        message: "Either email or password is invalide",
+        sucess: false,
+      });
+    //matching roles
+    if (findData.role != req.body.role) throw new Error("Invalide Account");
+    //matching password
+    let comparePassword = await bcrypt.compare(
+      req.body.password,
+      findData.password
+    );
+    if (!comparePassword)
+      return status(400).send({
+        message: "Either email or password is invalid",
+        sucess: false,
+      });
+    //generating token
+    let token = jwt.sign({ userId: findData._id }, process.env.SECURE_KEY, {
+      expiresIn: "20days",
+    });
+    res.status(200).send({
+      message: "Login Succussfully",
+      success: true,
+      token,
+      user: findData,
+    });
+  } catch (error) {
+    console.log(object);
+    res.status(500).send({
+      message: "something is wrong",
+      sucess: false,
+      error,
+    });
+  }
+};
+////current-user details
+let getCurrentUserController = async (req, res, next) => {
+  try {
+    let userId = req.userId;
+    let user = await userModel.findOne({ _id: userId });
+    res
+      .status(200)
+      .send({ message: "User Get SuccessFully", success: true, user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Somthing wrong , while fetching current user",
+      sucess: false,
+      error,
+    });
+  }
+};
+module.exports = {
+  registerController,
+  loginController,
+  getCurrentUserController,
+};
