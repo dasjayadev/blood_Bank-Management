@@ -71,7 +71,7 @@ let loginController = async (req, res, next) => {
       user: findData,
     });
   } catch (error) {
-    console.log(object);
+    console.log(error);
     res.status(500).send({
       message: "something is wrong",
       sucess: false,
