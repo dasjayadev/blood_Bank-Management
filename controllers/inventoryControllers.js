@@ -13,7 +13,7 @@ let createInventoryController = async (req, res, next) => {
     if (user.role == "doner" && invetoryType != "in")
       throw new Error("Not a User Account");
     if (user.role == "hospital" && invetoryType != "out")
-      throw new Error("not a hhospitsl user");
+      throw new Error("not a hospitsl user");
     //save invemtory
     let invetory = new inventoryModel(req.body);
     await invetory.save();
