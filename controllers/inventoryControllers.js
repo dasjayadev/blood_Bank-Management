@@ -38,8 +38,9 @@ let getInventoryController = async (req, res, next) => {
       return res.status(401).send({ message: "Not Vallide" });
     let inventory = await inventoryModel
       .findOne({ organisation: req.body.organisation })
-      .populate("doner")
-      .populate("hospital");
+      .populate("donar")
+      .populate("hospitsl")
+      .sort({ createAt: -1 });
     res.status(200).send({
       message: "Inventory Result successfully",
       success: true,
