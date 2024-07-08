@@ -7,7 +7,7 @@ function Login() {
       <div className="row h-100 g-0">
         <div className="col-md-6 d-none d-md-block p-0">
           <img
-            src="./assets/blood.jpg"
+            src="./assets/blood cover.jpg"
             alt="blood_bank_login"
             className="img-fluid w-100 h-100"
           />
