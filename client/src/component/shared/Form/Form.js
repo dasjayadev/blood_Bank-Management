@@ -215,7 +215,7 @@ function Form({ submitText, formTitle, formType }) {
       <br />
       <button
         type="submit"
-        classNameName="btn btn-primary"
+        className="btn btn-primary"
         onClick={formSubmitHandler}
       >
         {submitText}
