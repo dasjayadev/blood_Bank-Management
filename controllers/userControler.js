@@ -61,7 +61,7 @@ let loginController = async (req, res, next) => {
         sucess: false,
       });
     //generating token
-    let token = jwt.sign({ userId: findData }, process.env.SECURE_KEY, {
+    let token = jwt.sign({ userId: findData._id }, process.env.SECURE_KEY, {
       expiresIn: "20days",
     });
     res.status(200).send({

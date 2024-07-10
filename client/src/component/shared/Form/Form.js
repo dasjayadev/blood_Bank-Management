@@ -16,15 +16,22 @@ function Form({ submitText, formTitle, formType }) {
   let [hospitalName, setHospitalName] = useState("");
   let [originazation, setOriginazation] = useState("");
 
- // This is for form submit Handler
- function formSubmitHandler(e) {
-    // Prevent default form submission
-    e.preventDefault(); 
-
+  // This is for form submit Handler
+  function formSubmitHandler(e) {
     if (formType === "login") {
       handleLoginController(e, email, password, role);
     } else if (formType === "register") {
-      handleRegistrationController(e, email, password, name, role, phone, address, hospitalName, originazation);
+      handleRegistrationController(
+        e,
+        email,
+        password,
+        name,
+        role,
+        phone,
+        address,
+        hospitalName,
+        originazation
+      );
     }
 
     // Reset form fields after submission
@@ -36,7 +43,6 @@ function Form({ submitText, formTitle, formType }) {
     setHospitalName("");
     setOriginazation("");
   }
-  
 
   return (
     <form>
