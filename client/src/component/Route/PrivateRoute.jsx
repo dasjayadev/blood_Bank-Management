@@ -24,7 +24,7 @@ function PrivateRoute({ children }) {
     return children
   }
   else{
-    <Navigate to = "/login" />
+   return <Navigate to = "/login" />
   }
 }
 
