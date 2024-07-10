@@ -29,7 +29,7 @@ const authSlice = createSlice({
       });
       //userRegister
       builder.addCase(userRegister.pending, (state) => {
-        state.loading = true;
+        state.loading = false;
         state.error = "";
       });
       builder.addCase(userRegister.fulfilled, (state, { payload }) => {
@@ -47,11 +47,11 @@ const authSlice = createSlice({
         state.error = "";
       });
       builder.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-        state.loading = true;
+        state.loading = false;
         state.user = payload.user;
       });
       builder.addCase(getCurrentUser.rejected, (state, { payload }) => {
-        state.loading = true;
+        state.loading = false;
         state.error = payload.error;
       });
     },
