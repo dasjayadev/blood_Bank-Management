@@ -39,7 +39,8 @@ function Header() {
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <span className="nav-link">{user?.name || user?.hospitalName || user?.organizationName}</span>
+                            <NavLink className="nav-link active mx-3" aria-current="page">{user?.name || user?.hospitalName || user?.organizationName}</NavLink>
+                            <h6><span class="badge bg-secondary">{user?.role}</span></h6>
                         </li>
                         <li className="nav-item">
                             <button className="btn btn-outline-light ms-2" onClick={logoutHandler}>Logout</button>

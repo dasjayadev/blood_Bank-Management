@@ -10,10 +10,9 @@ function Layout({children}) {
                 <div className="col">
                     <Header />
                 </div>
-
             </div>
-            <div className="row" style={{ minHeight: "80vh", width: "100%" }}>
-                <div className="col-md-3">
+            <div className="row g-0" style={{ minHeight: "80vh", width: "100%" }}>
+                <div className="col-md-3" style={{ backgroundColor: "grey" }} >
                     <Sidebar />
                 </div>
                 <div className="col-md-9">
