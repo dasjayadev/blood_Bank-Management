@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./component/Route/PrivateRoute";
 import PublicRoute from "./component/Route/PublicRoute";
+import Layout from "./component/shared/Latout/Layout";
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Register = React.lazy(() => import("./pages/auth/Register"));
@@ -19,7 +20,9 @@ function App() {
             path="/"
             element={
               <PrivateRoute>
-                <HomePage />
+                <Layout>
+                  <HomePage />
+                </Layout>
               </PrivateRoute>
             }
           />
