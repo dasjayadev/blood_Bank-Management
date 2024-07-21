@@ -10,8 +10,8 @@ let createInventoryController = async (req, res, next) => {
         .send({ message: "All field are requierd *", success: false });
     let user = await userModel.findOne({ email });
     if (!user) throw new Error("User Not Found");
-    if (user.role == "doner" && invetoryType != "in")
-      throw new Error("Not a User Account");
+    // if (user.role === "doner" && invetoryType != "in")
+    //   throw new Error("Not a User Account");
     if (user.role == "hospital" && invetoryType != "out")
       throw new Error("not a hospitsl user");
     //save invemtory
@@ -34,10 +34,10 @@ let createInventoryController = async (req, res, next) => {
 //this is for the getting -inventory
 let getInventoryController = async (req, res, next) => {
   try {
-    if (!req.body.organisation)
+    if (!req.userId)
       return res.status(401).send({ message: "Not Vallide" });
     let inventory = await inventoryModel
-      .findOne({ organisation: req.body.organisation })
+      .find({ organisation: req.userId})
       .populate("donar")
       .populate("hospitsl")
       .sort({ createAt: -1 });
