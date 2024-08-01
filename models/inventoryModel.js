@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 let inventorySchema = new mongoose.Schema({
-  invetoryType: {
+  inventoryType: {
     type: String,
     required: [true, "inventory type is required"],
     enum: ["in", "out"],
@@ -14,24 +14,24 @@ let inventorySchema = new mongoose.Schema({
     type: String,
     required: [true, "quantity is required *"],
   },
-  organisation: {
+  organization: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
-    required: [true, "organisation is required"],
+    required: [true, "organization is required"],
   },
-  hospitsl: {
+  hospital: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
     required: function () {
-      return this.invetoryType === "out";
+      return this.inventoryType === "out";
     },
   },
-  donar: {
+  doner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
-    // required: function () {
-    //   return this.invetoryType === "in";
-    // },
+    required: function () {
+      return this.inventoryType === "in";
+    },
   },
 });
-module.exports = mongoose.model("inventory", inventorySchema);
+module.exports = mongoose.model("inventory", inventorySchema); 

@@ -61,9 +61,9 @@ export let userRegister = createAsyncThunk(
         hospitalName,
         originazationName,
       });
-      if (data.sucess) {
+      if (data.success) {
         toast.success(data.message);
-        window.location.replace("./login");
+        window.location.replace("/login");
       }
     } catch (error) {
       if (error.response && error.response.data.message) {

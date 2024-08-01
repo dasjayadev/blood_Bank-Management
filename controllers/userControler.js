@@ -8,7 +8,7 @@ let registerController = async (req, res, next) => {
     if (!req.body.email)
       return res
         .status(404)
-        .send({ message: "All field are requied*", sucess: false });
+        .send({ message: "All field are requied*", success: false });
     let existUser = await userModel.findOne({ email: req.body.email });
     if (existUser)
       return res
@@ -32,7 +32,7 @@ let registerController = async (req, res, next) => {
     console.log(error);
     res.status(500).send({
       message: "Internal Server Error",
-      sucess: false,
+      success: false,
       error,
     });
   }
@@ -46,7 +46,7 @@ let loginController = async (req, res, next) => {
     if (!findData)
       return res.status(401).send({
         message: "Either email or password is invalide",
-        sucess: false,
+        success: false,
       });
     //matching roles
     if (findData.role != req.body.role) throw new Error("Invalide Account");
@@ -58,7 +58,7 @@ let loginController = async (req, res, next) => {
     if (!comparePassword)
       return status(400).send({
         message: "Either email or password is invalid",
-        sucess: false,
+        success: false,
       });
     //generating token
     let token = jwt.sign({ userId: findData._id }, process.env.SECURE_KEY, {
@@ -74,7 +74,7 @@ let loginController = async (req, res, next) => {
     console.log(error);
     res.status(500).send({
       message: "something is wrong",
-      sucess: false,
+      success: false,
       error,
     });
   }
@@ -91,7 +91,7 @@ let getCurrentUserController = async (req, res, next) => {
     console.log(error);
     res.status(500).send({
       message: "Somthing wrong , while fetching current user",
-      sucess: false,
+      success: false,
       error,
     });
   }

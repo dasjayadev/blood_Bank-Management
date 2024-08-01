@@ -3,7 +3,7 @@ let colors = require("colors");
 let databaseConnections = async () => {
   try {
     await mongoose.connect(`${process.env.MONGO_URL}/blood`);
-    console.log(`Database connected sucessfuly`.bgMagenta.white);
+    console.log(`Database connected successfuly`.bgMagenta.white);
   } catch (err) {
     console.log(`somthing wrong in database connection`.bgWhite.black);
   }
