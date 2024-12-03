@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 
 function Header() {
 
-    const { user } = useSelector(state => state.auth);
-    const navigate = useNavigate();
+    let { user } = useSelector((item) => item.auth);
+    let navigate = useNavigate();
+    let location = useLocation();
 
     // This is for logout
     function logoutHandler() {
@@ -31,8 +32,30 @@ function Header() {
                             <NavLink className="nav-link active mx-3" aria-current="page">{user?.name || user?.hospitalName || user?.originazationName}</NavLink>
                             <h6><span class="badge bg-secondary">{user?.role}</span></h6>
                         </li>
+
+                        <li className='nav-item d-flex'>
+                        {user?.role === "originazation" && location.pathname === "/" && (
+                            <NavLink
+                                className="nav-link active mx-3"
+                                aria-current="page"
+                                to="/analytics"
+                                >
+                                Analytics
+                                </NavLink>
+                            )}
+                            {user?.role === "originazation" && location.pathname === "/analytics" && (
+                            <NavLink
+                                className="nav-link active mx-3"
+                                aria-current="page"
+                                to="/"
+                            >
+                                Home
+                            </NavLink>
+                            )}
+                        </li>
+
                         <li className="nav-item">
-                            <button className="btn btn-outline-light ms-2" onClick={logoutHandler}>Logout</button>
+                            <button className="btn btn-outline-light ms-2" onClick={logoutHandler}>LOGOUT</button>
                         </li>
                     </ul>
                 </div>

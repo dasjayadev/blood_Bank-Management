@@ -3,7 +3,8 @@ let jwt = require("jsonwebtoken");
 const userModel = require("../models/user");
 const { status } = require("express/lib/response");
 //this is for the registration
-let registerController = async (req, res, next) => {
+let 
+registerController = async (req, res, next) => {
   try {
     if (!req.body.email)
       return res

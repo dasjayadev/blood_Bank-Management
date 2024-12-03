@@ -14,7 +14,7 @@ function Form({ submitText, formTitle, formType }) {
   let [phone, setPhone] = useState("");
   let [address, setAddress] = useState("");
   let [hospitalName, setHospitalName] = useState("");
-  let [originazation, setOriginazation] = useState("");
+  let [originazationName, setOriginazationName] = useState("");
 
   // This is for form submit Handler
   function formSubmitHandler(e) {
@@ -30,7 +30,7 @@ function Form({ submitText, formTitle, formType }) {
         phone,
         address,
         hospitalName,
-        originazation
+        originazationName
       );
     }
 
@@ -41,7 +41,7 @@ function Form({ submitText, formTitle, formType }) {
     setPhone("");
     setAddress("");
     setHospitalName("");
-    setOriginazation("");
+    setOriginazationName("");
   }
 
   return (
@@ -161,8 +161,8 @@ function Form({ submitText, formTitle, formType }) {
                   <InputType
                     inputType="text"
                     labelText="Originazation Name"
-                    value={originazation}
-                    onChange={(e) => setOriginazation(e.target.value)}
+                    value={originazationName}
+                    onChange={(e) => setOriginazationName(e.target.value)}
                     name="originazation"
                     labelFor="originazation"
                   />
@@ -210,11 +210,13 @@ function Form({ submitText, formTitle, formType }) {
       })()}
       {formType === "login" && (
         <>
+        {" "}
           Not registered yet ? Register <NavLink to="/register">Here !</NavLink>
         </>
       )}
       {formType === "register" && (
         <>
+        {""}
           Already Register ? Login <NavLink to="/login">Here !</NavLink>
         </>
       )}

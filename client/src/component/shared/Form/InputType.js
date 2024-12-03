@@ -11,10 +11,8 @@ function InputType({ labelFor, value, onChange, name, labelText, inputType, erro
         value={value}
         name={name}
         onChange={onChange}
-        className={`form-control ${error ? "is-invalid" : ""}`}
-        id={labelFor}
+        className="form-control"
       />
-      {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 }

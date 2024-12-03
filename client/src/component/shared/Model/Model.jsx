@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputType from "../Form/InputType";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -10,13 +10,15 @@ function Model() {
   let [email, setEmail] = useState("");
   let [quantity, setQuantity] = useState(0);
   let [bloodType, setBLoodType] = useState("");
+  let [hospitalAndDonarData, setHospitalAndDonarData] = useState([])
+
   //this is for handling model form
   async function createModelHandler() {
     try {
-      if (!bloodType || !quantity)
+      if (!bloodType || !quantity || !email)
         return toast.error("All Field are Requried*");
       let { data } = await API.post("/inventory/v1/create-inventory", {
-        email: user?.email,
+        email,
         inventoryType,
         organization: user?._id,
         quantity,
@@ -32,6 +34,21 @@ function Model() {
       //window.location.reload()
     }
   }
+  //this is for the getting hospital and donar name for checkbox
+  useEffect(()=>{
+    async function getData() {
+      try {
+        let url = 
+        inventoryType === "in" ? "/inventory/v1/get-donar-name" : "/inventory/v1/get-hospital-name";
+        let { data } = await API.get(url);
+        setHospitalAndDonarData(data.list);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    }
+    getData();
+  },[inventoryType]);
   return (
     <div
       className="modal fade"
@@ -94,7 +111,30 @@ function Model() {
             <br />
 
             {/* //this is for the email */}
-            <InputType
+            <select 
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e)=>{
+                setEmail(e.target.value)
+              }}
+            >
+              <option>
+                Select
+                {
+                  inventoryType === "in" ? "Doner Email" : "Hospital Name"
+                }
+              </option>
+              {hospitalAndDonarData.length > 0 &&
+                hospitalAndDonarData?.map((item) => {
+                  return (
+                    <option value={item.email}>
+                      {item.hospitalName || item.name}
+                    </option>
+                  );
+                })}
+            </select>
+            
+            {/* <InputType
               labelFor="email"
               labelText="Email"
               inputType="email"
@@ -103,7 +143,7 @@ function Model() {
                 setEmail(e.target.value);
               }}
               name="email"
-            />
+            /> */}
 
             {/* this is for quantity */}
             <br />
