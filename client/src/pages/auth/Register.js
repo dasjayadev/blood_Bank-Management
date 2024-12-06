@@ -5,13 +5,13 @@ import Spinner from "../../component/Spinner";
 import { toast } from "react-toastify";
 
 function Register() {
-  let {error,loading} = useSelector(item => item.auth)
+  let {error,loading} = useSelector((item) => item.auth)
   return (
     <>
       {loading && <Spinner/>}
       {!loading && error && toast.error(error.message)}
-      {
-        !loading && !error && <>
+      {!loading && !error && (
+          <>
         <div className="container-fluid vh-100">
         <div className="row h-100 g-0">
           <div className="col-md-6 d-none d-md-block p-0">
@@ -32,7 +32,7 @@ function Register() {
           </div>
         </div>
       </div>
-        </>
+        </>)
       }
     </>
   );
